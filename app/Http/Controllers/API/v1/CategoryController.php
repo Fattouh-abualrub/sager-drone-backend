@@ -55,7 +55,7 @@ class CategoryController extends Controller
             }
 
             $category = Category::create([
-                'name' => $request->name
+                'name' => strip_tags($request->name)
             ]);
 
             $response = [
@@ -114,7 +114,7 @@ class CategoryController extends Controller
             }
 
             $category->update([
-                'name' => $request->name
+                'name' => strip_tags($request->name)
             ]);
 
 

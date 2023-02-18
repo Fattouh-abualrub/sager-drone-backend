@@ -64,8 +64,6 @@ class UserController extends Controller
                 return response([
                     "errors" => ["message" => "These credentials do not match our records."]
                 ], 422);
-
-                return $this->faildData('validation error', $errors, 403);
             }
 
             $token = auth()->user()->createToken('authToken')->plainTextToken;
@@ -104,8 +102,8 @@ class UserController extends Controller
             }
 
             $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
+                'name' => strip_tags($request->name),
+                'email' => strip_tags($request->email),
                 'password' => Hash::make($request->password)
             ]);
 
@@ -180,8 +178,8 @@ class UserController extends Controller
 
 
             $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
+                'name' => strip_tags($request->name),
+                'email' => strip_tags($request->email),
             ]);
 
             $response = ['user' => $user, 'message' => "User Updated Successfully.", "status" => true];

@@ -68,8 +68,8 @@ class ProductController extends Controller
             }
 
             $product = Product::create([
-                'name' => $request->name,
-                'description' => $request->description,
+                'name' => strip_tags($request->name),
+                'description' => strip_tags($request->description),
                 'price' => $request->price,
                 'quantity' => $request->quantity,
                 'user_id' => Auth::guard('sanctum')->user()->id,
@@ -143,8 +143,8 @@ class ProductController extends Controller
             }
 
             $product->update([
-                'name' => $request->name,
-                'description' => $request->description,
+                'name' => strip_tags($request->name),
+                'description' => strip_tags($request->description),
                 'price' => $request->price,
                 'quantity' => $request->quantity
             ]);
